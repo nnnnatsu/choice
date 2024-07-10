@@ -39,16 +39,16 @@ criteria = {
 enabled_options = [key for key in criteria.keys() if criteria[key]]
 disabled_options = [key for key in criteria.keys() if not criteria[key]]
 
-# Display the enabled options
-selected_criteria = st.multiselect(
-    'เลือกอาการ',
-    options=enabled_options,
-    format_func=lambda x: f"{x} [{''.join(criteria[x])}]"
-)
+# # Display the enabled options
+# selected_criteria = st.multiselect(
+#     'เลือกอาการ',
+#     options=enabled_options,
+#     format_func=lambda x: f"{x} [{''.join(criteria[x])}]"
+# )
 
 # Display the disabled options in gray text
-for option in disabled_options:
-    st.write(f"<span style='color:gray'>{option} [ไม่สามารถเลือกได้]</span>", unsafe_allow_html=True)
+# for option in disabled_options:
+#     st.write(f"<span style='color:gray'>{option} [ไม่สามารถเลือกได้]</span>", unsafe_allow_html=True)
 
 # Calculate scores
 scores = {'P': 0, 'B': 0, 'C': 0}
