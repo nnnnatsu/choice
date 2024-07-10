@@ -38,17 +38,18 @@ criteria = {
 # Separate enabled and disabled options
 enabled_options = [key for key in criteria.keys() if criteria[key]]
 disabled_options = [key for key in criteria.keys() if not criteria[key]]
+all_options = enabled_options + disabled_options
 
-# Display the enabled options
+# Display the options with disabled ones in gray
 selected_criteria = st.multiselect(
     'เลือกอาการ',
-    options=enabled_options,
-    format_func=lambda x: x  # Remove the [] in option choice
+    options=all_options,
+    format_func=lambda x: f"{x}" if criteria[x] else f"{x} (ไม่สามารถเลือกได้)",
+    disabled_options=[False if criteria[x] else True for x in all_options]
 )
 
-# Display the disabled options in gray text
-for option in disabled_options:
-    st.write(f"<span style='color:gray'>{option} [ไม่สามารถเลือกได้]</span>", unsafe_allow_html=True)
+# Filter out the disabled options from the selection
+selected_criteria = [symptom for symptom in selected_criteria if criteria[symptom]]
 
 # Calculate scores
 scores = {'P': 0, 'B': 0, 'C': 0}
