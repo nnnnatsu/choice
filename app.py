@@ -40,11 +40,11 @@ enabled_options = [key for key in criteria.keys() if criteria[key]]
 disabled_options = [key for key in criteria.keys() if not criteria[key]]
 
 # # Display the enabled options
-# selected_criteria = st.multiselect(
-#     'เลือกอาการ',
-#     options=enabled_options,
-#     format_func=lambda x: f"{x} [{''.join(criteria[x])}]"
-# )
+selected_criteria = st.multiselect(
+    'เลือกอาการ',
+    options= [key for key in criteria.keys()],
+    format_func=lambda x: f"{x} [{''.join(criteria[x])}]"
+)
 
 # Display the disabled options in gray text
 # for option in disabled_options:
