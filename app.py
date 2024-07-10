@@ -1,7 +1,7 @@
 import streamlit as st
 
-# Define the symptoms and their corresponding scores
-symptoms = {
+# Define the scoring criteria
+scoring_criteria = {
     "ไข้": {
         "ไข้สูง": ["P", "B", "C"],
         "ไข้ต่ำ": ["P", "C"]
@@ -44,25 +44,20 @@ symptoms = {
     }
 }
 
-# Initialize the scores
-scores = {"P": 0, "B": 0, "C": 0}
+# Initialize a dictionary to keep track of the points
+points = {"P": 0, "B": 0, "C": 0}
 
-# User input for each category
-st.header('Disease Classification')
-selected_symptoms = {}
+# Display the scoring criteria
+for topic, choices in scoring_criteria.items():
+    st.markdown(f"**{topic}**")
+    for choice, scores in choices.items():
+        if st.checkbox(choice):
+            for score in scores:
+                points[score] += 1
 
-for category, options in symptoms.items():
-    if st.checkbox(category):
-        selected_symptoms[category] = st.selectbox(f"เลือกอาการในหัวข้อ {category}", options.keys())
-
-if st.button('Send'):
-    # Calculate the scores
-    for category, selected_option in selected_symptoms.items():
-        for disease in symptoms[category][selected_option]:
-            scores[disease] += 1
-
-    # Display the results
+# Display the results
+if st.button('Submit'):
     st.markdown('---')
-    st.write(f"Pneumonia (P): {scores['P']} points")
-    st.write(f"Bronchitis (B): {scores['B']} points")
-    st.write(f"COVID-19 (C): {scores['C']} points")
+    st.markdown(f"**Pneumonia (P):** {points['P']} points")
+    st.markdown(f"**Bronchitis (B):** {points['B']} points")
+    st.markdown(f"**COVID-19 (C):** {points['C']} points")
