@@ -40,12 +40,11 @@ enabled_options = [key for key in criteria.keys() if criteria[key]]
 disabled_options = [key for key in criteria.keys() if not criteria[key]]
 all_options = enabled_options + disabled_options
 
-# Display the options with disabled ones in gray
+# Display the options with custom formatting for disabled ones
 selected_criteria = st.multiselect(
     'เลือกอาการ',
     options=all_options,
     format_func=lambda x: f"{x}" if criteria[x] else f"{x} (ไม่สามารถเลือกได้)",
-    disabled_options=[False if criteria[x] else True for x in all_options]
 )
 
 # Filter out the disabled options from the selection
