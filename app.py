@@ -52,15 +52,14 @@ st.header('Disease Classification')
 selected_symptoms = {}
 
 for category, options in symptoms.items():
-    st.markdown(f"**{category}**")
-    selected_symptoms[category] = st.multiselect("", options.keys(), key=category)
+    if st.checkbox(category):
+        selected_symptoms[category] = st.selectbox(f"เลือกอาการในหัวข้อ {category}", options.keys())
 
 if st.button('Send'):
     # Calculate the scores
-    for category, selected_options in selected_symptoms.items():
-        for option in selected_options:
-            for disease in symptoms[category][option]:
-                scores[disease] += 1
+    for category, selected_option in selected_symptoms.items():
+        for disease in symptoms[category][selected_option]:
+            scores[disease] += 1
 
     # Display the results
     st.markdown('---')
