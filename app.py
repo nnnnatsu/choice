@@ -46,7 +46,7 @@ if st.button('ส่ง'):
     st.write(f"คะแนนของ COVID-19 (C): {scores['C']}")
 
     max_score = max(scores.values())
-    if max_score < 6:
+    if max_score < 10:
         st.write("ความเสี่ยงต่ำ")
     else:
         risk_disease = max(scores, key=scores.get)
